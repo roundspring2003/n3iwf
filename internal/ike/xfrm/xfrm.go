@@ -97,6 +97,8 @@ func ApplyXFRMRule(n3iwf_is_initiator bool, xfrmiId uint32,
 	xfrmState.Auth = xfrmIntegrityAlgorithm
 	xfrmState.Crypt = xfrmEncryptionAlgorithm
 	xfrmState.ESN = childSecurityAssociation.EsnInfo.GetNeedESN()
+	// Enable RFC 4303 anti-replay protection (zero disables it).
+	xfrmState.ReplayWindow = 32
 
 	// Commit xfrm state to netlink
 	var err error
